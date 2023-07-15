@@ -1,6 +1,8 @@
 package fr.amoya.ktaglib.tag.id3.id3v2.contentFrames
 
 import fr.amoya.ktaglib.tag.id3.id3v2.Id3FrameContent
+import korlibs.io.lang.Charsets
+import korlibs.io.lang.toString
 
 /*
 * fr.amoya.ktaglib.common.tags.id3v2.frame.contentFrames
@@ -13,6 +15,10 @@ object Id3v2FrameContentParsers {
     private const val requiredMessageNotEmpty = "Some data is required in order to parse the frame"
     private const val requiredMessageDelimiterIndex = "Delimiter index is lesser than required"
 
+    private val encodingMap = mapOf(
+        "fffe" to Charsets.UTF16_LE
+    )
+
     private fun getLastDelimiter(delimiter: Int, data: ByteArray): Int =
         data.indexOfLast { it.toInt() == delimiter }
 
@@ -22,10 +28,12 @@ object Id3v2FrameContentParsers {
     fun rawParser(data: ByteArray): Id3FrameContent = Id3v2FrameContentRaw(data)
     fun textParser(data: ByteArray): Id3FrameContent {
         require(data.isNotEmpty()) { requiredMessageNotEmpty }
+        val encodingValue = "${data[1].toUByte().toString(16)}${data[2].toUByte().toString(16)}"
+        val encoding = encodingMap[encodingValue] ?: throw Exception("Unknown charset: $encodingValue")
         return if (data.last().toInt() == 0 && data.size > 1) {
-            Id3v2FrameContentText(data.decodeToString(1, data.size - 1))
+            Id3v2FrameContentText(data.toString(charset = encoding, 3, data.size - 1))
         } else {
-            Id3v2FrameContentText(data.decodeToString(1, data.size))
+            Id3v2FrameContentText(data.toString(charset = encoding, 1, data.size))
         }
     }
 
