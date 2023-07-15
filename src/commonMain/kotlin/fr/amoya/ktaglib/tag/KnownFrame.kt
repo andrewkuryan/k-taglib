@@ -1,6 +1,5 @@
 package fr.amoya.ktaglib.tag
 
-
 /*
 * fr.amoya.ktaglib.common.tags
 * As a part of the Project k-taglib
@@ -10,8 +9,7 @@ package fr.amoya.ktaglib.tag
 
 typealias frameContentParserFn = (ByteArray) -> FrameContent
 
-interface KnownFrame
-{
-  val description: String
-  val parserFn: frameContentParserFn
+interface KnownFrame {
+    val description: String
+    val parserFn: frameContentParserFn
 }

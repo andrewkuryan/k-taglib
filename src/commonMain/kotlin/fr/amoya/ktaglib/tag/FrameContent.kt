@@ -1,6 +1,5 @@
 package fr.amoya.ktaglib.tag
 
-
 /*
 * fr.amoya.ktaglib.common
 * As a part of the Project k-taglib
@@ -8,8 +7,6 @@ package fr.amoya.ktaglib.tag
 * Created on 06/05/2021
 */
 
-
-interface FrameContent
-{
-  fun getContentAsString(): String
+interface FrameContent {
+    fun getContentAsString(): String
 }

@@ -45,17 +45,13 @@ K-TagLib wants to be as easy as possible to use.
 ### Read Tag
 * retreive the tag, may raise error (exhaustive list of errors and exceptions to be defined) :
 ```kotlin
-  val tag: Tag = Tag.getTag(filename)
-```
-* retreive the tag, does not raise any error but return null if parsing failed :
-```kotlin
-  val tag: Tag? = Tag.getTagOrNull(filename)
+  val tag: Tag = Tag.getTag(VfsFile)
 ```
 * using the tag, for this example, let's assume the file is an mp3 file tagged with the id3v2.3 standard :
 
 (see list of supported standards below)
 ```kotlin
-  val tag: Tag = Tag.getTag("/path/to/file/id3v23.mp3")
+  val tag: Tag = Tag.getTag(LocalVfs("/path/to/file/id3v23.mp3"))
 
   // for now, only those fields are in the interface but it might change in the future
   val title:        String? = tag.title
@@ -91,18 +87,18 @@ K-TagLib wants to be as easy as possible to use.
 | OGG         | TODO          | TODO              | TODO          | TODO              |
 | APE         | TODO          | TODO              | TODO          | TODO              |
 
-## Supported Plateforms
-| Platform        | Status      |
-| :-------------: | :---------: |
+## Supported Platforms
+| Platform        |   Status    |
+| :-------------: |:-----------:|
 | Java 1.8        | Not Planned |
-| Java 11         | OK          |
-| Java 15         | TODO        |
-| Windows native  | TODO        |
-| Linux native    | TODO        |
-| OSX native      | TODO        |
-| Kotlin JS       | TODO        |
-| Android         | TODO        |
-| iOS             | TODO        |
+| Java 11         |     OK      |
+| Java 15         |    TODO     |
+| Windows native  |     OK      |
+| Linux native    |     OK      |
+| OSX native      |     OK      |
+| Kotlin JS       |    TODO     |
+| Android         |    TODO     |
+| iOS             |    TODO     |
 
 ## RoadMap
 

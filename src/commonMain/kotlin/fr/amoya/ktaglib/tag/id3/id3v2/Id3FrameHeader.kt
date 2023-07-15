@@ -1,6 +1,5 @@
 package fr.amoya.ktaglib.tag.id3.id3v2
 
-
 /*
 * fr.amoya.ktaglib.tags.id3
 * As a part of the Project k-taglib
@@ -8,10 +7,8 @@ package fr.amoya.ktaglib.tag.id3.id3v2
 * Created on 01/05/2021
 */
 
-
-interface Id3FrameHeader
-{
-  var id: Id3V2KnownFrame
-  var size: Int
+interface Id3FrameHeader {
+    var id: Id3V2KnownFrame
+    var size: Int
 }
 

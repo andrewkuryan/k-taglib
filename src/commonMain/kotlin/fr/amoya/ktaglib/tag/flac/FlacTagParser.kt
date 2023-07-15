@@ -1,9 +1,7 @@
 package fr.amoya.ktaglib.tag.flac
 
-
 import fr.amoya.ktaglib.tag.Tag
 import fr.amoya.ktaglib.tag.TagParser
-
 
 /*
 * fr.amoya.ktaglib.common.parsers.flac
@@ -12,11 +10,9 @@ import fr.amoya.ktaglib.tag.TagParser
 * Created on 06/05/2021
 */
 
-
-class FlacTagParser : TagParser
-{
-  override fun parse(rawData: ByteArray): Tag
-  {
-    TODO("Not yet implemented")
-  }
+@ExperimentalUnsignedTypes
+class FlacTagParser : TagParser {
+    override fun parse(rawData: ByteArray): Tag {
+        TODO("Not yet implemented")
+    }
 }

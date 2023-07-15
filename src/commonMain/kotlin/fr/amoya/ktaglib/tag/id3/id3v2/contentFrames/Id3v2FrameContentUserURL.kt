@@ -2,7 +2,6 @@ package fr.amoya.ktaglib.tag.id3.id3v2.contentFrames
 
 import fr.amoya.ktaglib.tag.id3.id3v2.Id3FrameContent
 
-
 /*
 * fr.amoya.ktaglib.common.tags.id3v2.frame.contentFrames
 * As a part of the Project k-taglib
@@ -10,11 +9,9 @@ import fr.amoya.ktaglib.tag.id3.id3v2.Id3FrameContent
 * Created on 05/05/2021
 */
 
-
 data class Id3v2FrameContentUserURL(
-  var description: String,
-  var url: String
-) : Id3FrameContent
-{
-  override fun getContentAsString(): String = "$description : $url"
+    var description: String,
+    var url: String,
+) : Id3FrameContent {
+    override fun getContentAsString(): String = "$description : $url"
 }

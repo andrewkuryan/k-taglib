@@ -8,7 +8,6 @@ import fr.amoya.ktaglib.tag.id3.id3v2.Id3FrameHeader
 import fr.amoya.ktaglib.tag.id3.id3v2.v23.Id3V23KnownFrame
 import fr.amoya.ktaglib.utils.ByteHelper
 
-
 /*
 * fr.amoya.ktaglib.parsers.id3
 * As a part of the Project k-taglib
@@ -17,26 +16,21 @@ import fr.amoya.ktaglib.utils.ByteHelper
 */
 
 @ExperimentalUnsignedTypes
-class Id3v22TagParser : AbstractId3v2TagParser
-{
-  override fun parseFrameHeader(rawFrameHeader: ByteArray): Id3FrameHeader
-  {
-    require(rawFrameHeader.size >= headerSize) { "Id3v2 Frame header must be $headerSize bytes" }
-    val id = try
-    {
-      Id3V23KnownFrame.valueOf(rawFrameHeader.decodeToString(0, 3))
+class Id3v22TagParser : AbstractId3v2TagParser {
+    override fun parseFrameHeader(rawFrameHeader: ByteArray): Id3FrameHeader {
+        require(rawFrameHeader.size >= headerSize) { "Id3v2 Frame header must be $headerSize bytes" }
+        val id = try {
+            Id3V23KnownFrame.valueOf(rawFrameHeader.decodeToString(0, 3))
+        } catch (_: Exception) {
+            Id3V23KnownFrame.NONE
+        }
+        return Id3v22FrameHeader(
+            id = id,
+            size = ByteHelper.aggregateBytes(rawFrameHeader.copyOfRange(4, 8), 4, UInt::class).toInt()
+        )
     }
-    catch (_: Exception)
-    {
-      Id3V23KnownFrame.NONE
-    }
-    return Id3v22FrameHeader(
-      id = id,
-      size = ByteHelper.aggregateBytes(rawFrameHeader.copyOfRange(4, 8), 4, UInt::class).toInt()
-    )
-  }
 
-  override fun parseFrame(header: Id3FrameHeader, rawFrameContent: ByteArray): Id3Frame =
-    Id3Frame(header, (header.id as Id3V22KnownFrame).parserFn(rawFrameContent) as Id3FrameContent)
+    override fun parseFrame(header: Id3FrameHeader, rawFrameContent: ByteArray): Id3Frame =
+        Id3Frame(header, (header.id as Id3V22KnownFrame).parserFn(rawFrameContent) as Id3FrameContent)
 }
 
